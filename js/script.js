@@ -3,7 +3,7 @@ const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 // Define varibles
 let currentQuestion = {};
-let acceptingAnswers = true;
+let acceptingAnswers = false;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
@@ -14,7 +14,7 @@ let questions = [
         question: "What does HTML stand for?",
         choice1: "Home Tool Markup Language",
         choice2: "Hyperlinks and Text Markup Language",
-        choice3: "Hyper Text Markup Language*",
+        choice3: "Hyper Text Markup Language",
         choice4: "Hyper Text Makeup Language",
         answer: 3
     },
@@ -39,7 +39,7 @@ let questions = [
         choice1: "<link rel='script.js' href='./assets/script.js'>",
         choice2: "<js>",
         choice3: "<javascript>",
-        choice4: "<script",
+        choice4: "<script>",
         answer: 4
     },
     {
@@ -63,15 +63,41 @@ startGame = () => {
     availableQuestions = [...questions]; 
     getNewQuestion();
 };
-
+// gets random question from array
 getNewQuestion = () => {
+// go to end of game if out of questions
+    if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+        // redirects to end page
+        return window.location.assign("/end.html");
+    };
     questionCounter++;
     // gets random question
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
+// adds choices
+    choices.forEach( choice => {
+        const number = choice.dataset['number'];
+        choice.innerText = currentQuestion['choice' + number];
+    })
+    // gets rid of used question
+    availableQuestions.splice(questionIndex, 1);
 
-
+    acceptingAnswers = true;
 };
+// allows choices to be selected/check for correct answer
+choices.forEach(choice => {
+    choice.addEventListener("click", e => {
+        // prevents answers before question is set
+        if(!acceptingAnswers) return;
+
+        acceptingAnswers = false;
+        const selectedChoice = e.target;
+        const selectedAnswer = selectedChoice.dataset["number"];
+        console.log(selectedAnswer);
+        getNewQuestion();
+    });
+});
+
 
 startGame();
