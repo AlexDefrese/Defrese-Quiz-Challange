@@ -1,0 +1,77 @@
+const question = document.getElementById("question");
+// creates array of answer choices
+const choices = Array.from(document.getElementsByClassName("choice-text"));
+// Define varibles
+let currentQuestion = {};
+let acceptingAnswers = true;
+let score = 0;
+let questionCounter = 0;
+let availableQuestions = [];
+
+// Creates array of questions
+let questions = [
+    {
+        question: "What does HTML stand for?",
+        choice1: "Home Tool Markup Language",
+        choice2: "Hyperlinks and Text Markup Language",
+        choice3: "Hyper Text Markup Language*",
+        choice4: "Hyper Text Makeup Language",
+        answer: 3
+    },
+    {
+        question: "What does CSS stand for?",
+        choice1: "Computer Style Sheets",
+        choice2: "Cascading Style Sheets",
+        choice3: "Crazy Sliding Seals",
+        choice4: "Can't Stand Styling",
+        answer: 2
+    },
+    {
+        question: "What is the correct HTML for referring to an external styling sheet?",
+        choice1: "<link rel='stylesheet'",
+        choice2: "<link relate='stylesheet'",
+        choice3: "<link rel='go-to-stylesheet-plz'>",
+        choice4: "What's a style sheet?",
+        answer: 1
+    },
+    {
+        question: "Inside which HTML element do we put the JavaScript?",
+        choice1: "<link rel='script.js' href='./assets/script.js'>",
+        choice2: "<js>",
+        choice3: "<javascript>",
+        choice4: "<script",
+        answer: 4
+    },
+    {
+        question: "What is the correct HTML element for inserting a line break?",
+        choice1: "<br>",
+        choice2: "<break>",
+        choice3: "<b>",
+        choice4: "<ins-brk-plz>",
+        answer: 1
+    }
+];
+
+// create constants
+const MAX_QUESTIONS = 5;
+
+// starting the game, 'fat arrow syntax' provides more concise way to write functions
+startGame = () => {
+    questionCounter = 0;
+    score = 0;
+    // shorthand for spreading one array into another array
+    availableQuestions = [...questions]; 
+    getNewQuestion();
+};
+
+getNewQuestion = () => {
+    questionCounter++;
+    // gets random question
+    const questionIndex = Math.floor(Math.random() * availableQuestions.length);
+    currentQuestion = availableQuestions[questionIndex];
+    question.innerText = currentQuestion.question;
+
+
+};
+
+startGame();
