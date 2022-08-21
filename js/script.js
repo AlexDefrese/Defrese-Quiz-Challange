@@ -1,8 +1,8 @@
 const question = document.getElementById("question");
 // creates array of answer choices
 const choices = Array.from(document.getElementsByClassName("choice-text"));
-const questionCounterText = getElementById("questionCounter");
-const scoreText = getElementById("score");
+const questionCounterText = document.getElementById("questionCounter");
+const scoreText = document.getElementById("score");
 
 // Define varibles
 let currentQuestion = {};
@@ -78,7 +78,7 @@ getNewQuestion = () => {
     // gets random question
     const questionIndex = Math.floor(Math.random() * availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
-    // question.innerText = currentQuestion.question;
+    question.innerText = currentQuestion.question;
 // adds choices
     choices.forEach( choice => {
         const number = choice.dataset['number'];
@@ -101,6 +101,7 @@ choices.forEach(choice => {
 // check for correct answer
 // ternary operator
         const classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect';
+
 
         selectedChoice.parentElement.classList.add(classToApply);
 // set delay between color switch /next question
