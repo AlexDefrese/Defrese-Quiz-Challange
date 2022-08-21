@@ -7,7 +7,7 @@ const scoreText = document.getElementById("score");
 // Define varibles
 let currentQuestion = {};
 let acceptingAnswers = false;
-let score = 0;
+let score = 60;
 let questionCounter = 0;
 let availableQuestions = [];
 
@@ -65,13 +65,21 @@ startGame = () => {
     // shorthand for spreading one array into another array
     availableQuestions = [...questions]; 
     getNewQuestion();
-};
+//     updateScore();
+// };
+// // updates timer
+// updateScore =() => {
+//     scoreText.innerHTML = "60";
+//     score--;
+}
 // gets random question from array
 getNewQuestion = () => {
 // go to end of game if out of questions
     if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+        // saves score
+        localStorage.setItem('mostRecentScore', score);
         // redirects to end page
-        return window.location.assign("/end.html");
+        return window.location.assign("./end.html");
     };
     questionCounter++;
     questionCounterText.innerText = questionCounter + "/" + MAX_QUESTIONS;
