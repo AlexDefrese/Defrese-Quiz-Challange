@@ -7,7 +7,7 @@ const scoreText = document.getElementById("score");
 // Define varibles
 let currentQuestion = {};
 let acceptingAnswers = false;
-let score = 120;
+let score = 61;
 let questionCounter = 0;
 let availableQuestions = [];
 
@@ -31,8 +31,8 @@ let questions = [
     },
     {
         question: "What is the correct HTML for referring to an external styling sheet?",
-        choice1: "<link rel='stylesheet'",
-        choice2: "<link relate='stylesheet'",
+        choice1: "<link rel='stylesheet'>",
+        choice2: "<link relate='stylesheet'>",
         choice3: "<link rel='go-to-stylesheet-plz'>",
         choice4: "What's a style sheet?",
         answer: 1
@@ -61,8 +61,7 @@ const MAX_QUESTIONS = 5;
 // starting the game, 'fat arrow syntax' provides more concise way to write functions
 startGame = () => {
     questionCounter = 0;
-    // score = 60;
-    // shorthand for spreading one array into another array
+ // shorthand for spreading one array into another array
     availableQuestions = [...questions]; 
     getNewQuestion();
     updateScore();
@@ -130,13 +129,9 @@ choices.forEach(choice => {
 });
 
 function pleaseEnd (){
-    // score = 0;
-    // scoreText.innerHTML = score;
     localStorage.setItem ("mostRecentScore", score);
-    // setTimeout (function () {
         console.log ('hellothere');
         window.location.replace("./end.html");
-    // }, 1000);
     clearInterval(scoreTimer);
 };
 
