@@ -1,11 +1,11 @@
 const username = document.getElementById('username');
 const saveScoreBtn = document.getElementById('saveScoreBtn');
-const finalScore = document.getElementById('finalScore');
+const finalScore = document.getElementById('finalscore');
 // gets score from local storage
 const mostRecentScore = localStorage.getItem("mostRecentScore");
 
 const highScores = JSON.parse(localStorage.getItem("highScores",)) || [];
-// finalScore.innerText = 60;
+finalScore.innerText = mostRecentScore;
 
 username.addEventListener('keyup', () =>{
     // disable save button if empty

@@ -7,7 +7,7 @@ const scoreText = document.getElementById("score");
 // Define varibles
 let currentQuestion = {};
 let acceptingAnswers = false;
-let score = 60;
+let score = 120;
 let questionCounter = 0;
 let availableQuestions = [];
 
@@ -61,16 +61,25 @@ const MAX_QUESTIONS = 5;
 // starting the game, 'fat arrow syntax' provides more concise way to write functions
 startGame = () => {
     questionCounter = 0;
-    score = 0;
+    // score = 60;
     // shorthand for spreading one array into another array
     availableQuestions = [...questions]; 
     getNewQuestion();
-//     updateScore();
-// };
+    updateScore();
+};
 // // updates timer
-// updateScore =() => {
-//     scoreText.innerHTML = "60";
-//     score--;
+updateScore =() => {
+    console.log("hello");
+    var scoreTimer = setInterval(function () {
+        score--;
+        if ( "selectedAnswer != selectedChoice", function (){
+            score = (score - 20);
+        })
+        scoreText.innerHTML = score;
+        if (score <= 0) {
+            pleaseEnd ()
+        };
+    }, 1000);
 }
 // gets random question from array
 getNewQuestion = () => {
@@ -120,5 +129,15 @@ choices.forEach(choice => {
     });
 });
 
+function pleaseEnd (){
+    // score = 0;
+    // scoreText.innerHTML = score;
+    localStorage.setItem ("mostRecentScore", score);
+    // setTimeout (function () {
+        console.log ('hellothere');
+        window.location.replace("./end.html");
+    // }, 1000);
+    clearInterval(scoreTimer);
+};
 
 startGame();
